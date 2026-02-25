@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-// In production (Vercel), there's no backend — read from static JSON
-// In dev, proxy to the Express API
-const IS_STATIC = import.meta.env.PROD;
+// Detection: if window location is on vercel.app or no dev server proxy,
+// use static JSON files. Otherwise use the live API.
+const IS_STATIC = !window.location.hostname.includes('localhost');
 
 const STATIC_MAP = {
     '/dashboard': '/data/dashboard.json',
